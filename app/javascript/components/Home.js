@@ -1,14 +1,20 @@
-import React from "react";
-import useFetch from "../hooks/useFetch.js";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getmessage } from '../redux/message/api.js';
 
 const Home = () => {
-    const url = 'api/v1/messages/index'
-    const { data, loading, error, reFetch } = useFetch(url)
-    return (
-        <div className="message_container">
-            <h1>{  data } David</h1>
-        </div>
-    );
-}
+  const message = useSelector((state) => state.message);
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    dispatch(getmessage());
+  }
+  
+  return (
+    <div className='message_container'>
+        <h1>{message} {' '} David</h1>
+        <button onClick={() => handleClick()}>Click me !</button>
+    </div>
+  );
+};
 
 export default Home;
