@@ -1,5 +1,5 @@
 class Api::V1::MessagesController < ApplicationController
-    before_action :set_message, only: [:show, :edit, :update, :destroy]
+  before_action :set_message, only: %i[show edit update destroy]
 
   # GET /messages
   # GET /messages.json
@@ -24,14 +24,12 @@ class Api::V1::MessagesController < ApplicationController
   end
 
   # GET /messages/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /messages
   # POST /messages.json
   def create
     @message = Message.new(message_params)
-
 
     if @message.save
       render json: @message
@@ -42,8 +40,7 @@ class Api::V1::MessagesController < ApplicationController
 
   # PATCH/PUT /messages/1
   # PATCH/PUT /messages/1.json
-  def update
-  end
+  def update; end
 
   # DELETE /messages/1
   # DELETE /messages/1.json
@@ -54,13 +51,14 @@ class Api::V1::MessagesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_message
-      @message = Message.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def message_params
-      params.permit(:content)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_message
+    @message = Message.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def message_params
+    params.permit(:content)
+  end
 end
